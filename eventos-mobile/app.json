@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "Eventos",
+    "slug": "eventos-mobile",
+    "version": "1.0.0",
+    "scheme": "eventos-mobile",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "plugins": ["expo-router", "expo-secure-store"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.estudos.eventosmobile"
+    }
+  }
+}
