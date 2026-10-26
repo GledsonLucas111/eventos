@@ -4,7 +4,9 @@ const KEY = "eventos.session";
 
 export async function readSession(): Promise<Session | null> {
   const saved = await SecureStore.getItemAsync(KEY);
+
   if (!saved) return null;
+
   try {
     const data = JSON.parse(saved);
     if (
@@ -18,9 +20,11 @@ export async function readSession(): Promise<Session | null> {
     return null;
   }
 }
+
 export function saveSession(session: Session) {
   return SecureStore.setItemAsync(KEY, JSON.stringify(session));
 }
+
 export function removeSession() {
   return SecureStore.deleteItemAsync(KEY);
 }

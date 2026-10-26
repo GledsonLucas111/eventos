@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export default function EventImage({ src }: { src: string }) {
   const [failed, setFailed] = useState(false);
+  
   return failed ? (
     <div className="grid h-full place-items-center bg-slate-100 text-xs text-slate-500">
       Imagem indisponível

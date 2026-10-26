@@ -22,11 +22,13 @@ export default function Registrations() {
   const [busyId, setBusyId] = useState<string | null>(null);
   const [actionError, setActionError] = useState("");
   const [message, setMessage] = useState("");
+  
   useFocusEffect(
     useCallback(() => {
       void loadRegistrations();
     }, [loadRegistrations]),
   );
+
   async function cancel(id: string) {
     setBusyId(id);
     setActionError("");
@@ -40,6 +42,7 @@ export default function Registrations() {
       setBusyId(null);
     }
   }
+
   async function confirmCancel(item: Registration) {
     if (await confirmAction("Cancelar inscrição?", item.event.title))
       await cancel(item.id);
@@ -47,6 +50,7 @@ export default function Registrations() {
 
   if (loading && registrations.length === 0)
     return <Loading message="Carregando inscrições…" />;
+
   return (
     <SafeAreaView edges={["left", "right", "bottom"]} style={common.screen}>
       <FlatList

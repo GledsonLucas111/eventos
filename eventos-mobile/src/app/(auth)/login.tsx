@@ -14,6 +14,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+
   async function handleLogin() {
     if (!email.trim() || !password) {
       setError("Informe e-mail e senha.");
@@ -29,6 +30,7 @@ export default function Login() {
       setBusy(false);
     }
   }
+  
   return (
     <FormScreen
       title="Bem-vindo de volta"

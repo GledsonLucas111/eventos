@@ -4,6 +4,7 @@ import { requireAdmin } from "@/lib/session";
 import EventCard from "./_components/event-card";
 
 type Props = { searchParams: Promise<{ q?: string }> };
+
 export default async function DashboardPage({ searchParams }: Props) {
   await requireAdmin();
   const { q = "" } = await searchParams;

@@ -3,6 +3,7 @@ import type { Event } from "@/types/event";
 import { colors } from "@/styles/theme";
 import { formatDate } from "@/utils/format-date";
 import { EventImage } from "./event-image";
+
 export function EventCard({
   event,
   onPress,
@@ -33,6 +34,7 @@ export function EventCard({
     </TouchableOpacity>
   );
 }
+
 const styles = StyleSheet.create({
   card: {
     borderRadius: 13,

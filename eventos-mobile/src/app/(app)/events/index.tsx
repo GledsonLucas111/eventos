@@ -24,6 +24,7 @@ export default function Events() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [leaving, setLeaving] = useState(false);
+
   const loadEvents = useCallback(async () => {
     setLoading(true);
     setError("");
@@ -35,11 +36,13 @@ export default function Events() {
       setLoading(false);
     }
   }, [request]);
+
   useFocusEffect(
     useCallback(() => {
       void loadEvents();
     }, [loadEvents]),
   );
+
   async function handleLogout() {
     setLeaving(true);
     try {
@@ -50,8 +53,10 @@ export default function Events() {
       setLeaving(false);
     }
   }
+
   if (loading && events.length === 0)
     return <Loading message="Carregando eventos…" />;
+
   return (
     <SafeAreaView edges={["left", "right", "bottom"]} style={common.screen}>
       <FlatList
@@ -112,6 +117,7 @@ export default function Events() {
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   header: { gap: 16, marginBottom: 22 },
   greeting: { color: colors.muted, fontSize: 15, flex: 1 },

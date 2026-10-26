@@ -13,6 +13,7 @@ const empty: EventFormData = {
   location: "",
   image: "",
 };
+
 export default function EventForm({ event }: { event?: EventData }) {
   const router = useRouter();
   const [form, setForm] = useState<EventFormData>(
@@ -29,6 +30,7 @@ export default function EventForm({ event }: { event?: EventData }) {
   );
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData();
@@ -51,6 +53,7 @@ export default function EventForm({ event }: { event?: EventData }) {
       setBusy(false);
     }
   }
+  
   return (
     <>
       {error && (

@@ -7,11 +7,15 @@ import EventImage from "@/components/event-image";
 import DeleteEventButton from "../_components/delete-event-button";
 
 type Props = { params: Promise<{ id: string }> };
+
 export default async function EventDetailsPage({ params }: Props) {
   await requireAdmin();
+
   const { id } = await params;
   const event = await prisma.event.findUnique({ where: { id } });
+
   if (!event) notFound();
+  
   return (
     <>
       <Link

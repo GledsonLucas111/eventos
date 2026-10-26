@@ -16,14 +16,19 @@ export async function POST(req: NextRequest) {
         password: z.string().min(1).max(72),
       })
       .parse(await req.json());
+
     const user = await db.user.findUnique({ where: { email: data.email } });
+
     if (!user || !(await compare(data.password, user.password)))
       throw new HttpError(401, "E-mail ou senha incorretos.");
+
     const accessToken = await token(user.id);
+
     const response = NextResponse.json({
       token: accessToken,
       user: { id: user.id, name: user.name, role: user.role },
     });
+
     response.cookies.set("session", accessToken, {
       httpOnly: true,
       sameSite: "strict",
@@ -31,6 +36,7 @@ export async function POST(req: NextRequest) {
       path: "/",
       maxAge: 86400,
     });
+    
     return response;
   });
 }

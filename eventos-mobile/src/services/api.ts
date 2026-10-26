@@ -11,16 +11,22 @@ export class ApiError extends Error {
     this.name = "ApiError";
   }
 }
+
 type Options = RequestInit & { token?: string };
 
 export async function api<T>(path: string, options: Options = {}): Promise<T> {
   const { token, ...requestOptions } = options;
+
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 20000);
   const headers = new Headers(requestOptions.headers);
+
   headers.set("Accept", "application/json");
+
   if (requestOptions.body) headers.set("Content-Type", "application/json");
+
   if (token) headers.set("Authorization", `Bearer ${token}`);
+
   try {
     const response = await fetch(`${API_URL}/api${path}`, {
       ...requestOptions,
@@ -28,9 +34,12 @@ export async function api<T>(path: string, options: Options = {}): Promise<T> {
       credentials: "omit",
       signal: controller.signal,
     });
+
     if (response.status === 204) return undefined as T;
+
     const text = await response.text();
     let data: unknown;
+
     try {
       data = text ? JSON.parse(text) : null;
     } catch {
@@ -48,10 +57,13 @@ export async function api<T>(path: string, options: Options = {}): Promise<T> {
           ? data.error
           : "Não foi possível concluir a operação.";
       throw new ApiError(message, response.status);
+
     }
+
     return data as T;
   } catch (error) {
     if (error instanceof ApiError) throw error;
+
     if (controller.signal.aborted)
       throw new Error(
         "A conexão demorou demais. Confira a API e tente novamente.",
@@ -59,6 +71,7 @@ export async function api<T>(path: string, options: Options = {}): Promise<T> {
     throw new Error(
       "Não foi possível conectar à API. Confira a URL, o servidor e a conexão de rede.",
     );
+    
   } finally {
     clearTimeout(timeout);
   }

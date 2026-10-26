@@ -14,6 +14,7 @@ function AppContent() {
     </RegistrationProvider>
   );
 }
+
 export default function RootLayout() {
   return (
     <SafeAreaProvider>

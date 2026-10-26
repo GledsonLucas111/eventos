@@ -1,10 +1,12 @@
 "use client";
 import type { FormEvent } from "react";
+
 type Props = {
   busy: boolean;
   error: string;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 };
+
 export default function LoginForm({ busy, error, onSubmit }: Props) {
   return (
     <main className="grid min-h-screen place-items-center bg-slate-100 p-6">

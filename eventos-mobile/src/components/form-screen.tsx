@@ -9,6 +9,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import type { ReactNode } from "react";
 import { colors, common } from "@/styles/theme";
+
 export function FormScreen({
   title,
   subtitle,
@@ -39,6 +40,7 @@ export function FormScreen({
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   container: { flexGrow: 1, justifyContent: "center", padding: 24 },
   form: { width: "100%", maxWidth: 440, alignSelf: "center", gap: 20 },

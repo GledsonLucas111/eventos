@@ -23,6 +23,7 @@ type AuthContextProps = {
   signOut: () => Promise<void>;
   request: <T>(path: string, options?: RequestInit) => Promise<T>;
 };
+
 export const AuthContext = createContext<AuthContextProps | undefined>(
   undefined,
 );
@@ -38,6 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let active = true;
+
     async function restore() {
       try {
         const saved = await readSession();
@@ -51,11 +53,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           else if (active) applySession(saved);
         }
       } catch {
-        /* Se não for possível restaurar a sessão, exibe o login. */
+
       } finally {
         if (active) setLoading(false);
       }
     }
+
     void restore();
     return () => {
       active = false;
@@ -72,6 +75,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       method: "POST",
       body: JSON.stringify({ email: email.trim().toLowerCase(), password }),
     });
+
     await saveSession(result);
     applySession(result);
   }
@@ -88,7 +92,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const request = useCallback(
     async <T,>(path: string, options?: RequestInit): Promise<T> => {
       const token = sessionRef.current?.token;
+
       if (!token) throw new Error("Faça login para continuar.");
+      
       try {
         return await api<T>(path, { ...options, token });
       } catch (error) {

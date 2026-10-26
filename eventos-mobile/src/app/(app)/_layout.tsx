@@ -2,10 +2,14 @@ import { Redirect, Stack } from "expo-router";
 import { useAuth } from "@/hooks/use-auth";
 import { Loading } from "@/components/feedback";
 import { colors } from "@/styles/theme";
+
 export default function AppLayout() {
   const { token, loading } = useAuth();
+  
   if (loading) return <Loading />;
+
   if (!token) return <Redirect href="/login" />;
+
   return (
     <Stack
       screenOptions={{

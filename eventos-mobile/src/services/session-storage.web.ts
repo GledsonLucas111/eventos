@@ -3,8 +3,11 @@ const KEY = "eventos.session";
 
 export async function readSession(): Promise<Session | null> {
   if (typeof window === "undefined") return null;
+
   const saved = window.sessionStorage.getItem(KEY);
+
   if (!saved) return null;
+  
   try {
     const data = JSON.parse(saved);
     if (

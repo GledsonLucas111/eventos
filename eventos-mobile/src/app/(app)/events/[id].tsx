@@ -29,6 +29,7 @@ export default function EventDetails() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const registration = registrations.find((item) => item.eventId === id);
+
   const loadEvent = useCallback(async () => {
     setLoading(true);
     setError("");
@@ -40,6 +41,7 @@ export default function EventDetails() {
       setLoading(false);
     }
   }, [id, request]);
+
   useEffect(() => {
     void loadEvent();
   }, [loadEvent]);
@@ -57,6 +59,7 @@ export default function EventDetails() {
       setBusy(false);
     }
   }
+
   async function cancel() {
     if (!registration) return;
     setBusy(true);
@@ -71,6 +74,7 @@ export default function EventDetails() {
       setBusy(false);
     }
   }
+  
   async function confirmCancel() {
     if (
       await confirmAction(

@@ -6,6 +6,7 @@ import {
   type TextInputProps,
 } from "react-native";
 import { colors } from "@/styles/theme";
+
 export function Input({ label, ...props }: TextInputProps & { label: string }) {
   return (
     <View style={styles.field}>
@@ -19,6 +20,7 @@ export function Input({ label, ...props }: TextInputProps & { label: string }) {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   field: { gap: 7 },
   label: { color: colors.text, fontSize: 14, fontWeight: "600" },

@@ -21,10 +21,12 @@ export async function POST(req: NextRequest) {
           .max(72),
       })
       .parse(await req.json());
+
     const user = await db.user.create({
       data: { ...data, password: await hash(data.password, 10) },
       select: { id: true, name: true, email: true },
     });
+    
     return NextResponse.json(user, { status: 201 });
   });
 }

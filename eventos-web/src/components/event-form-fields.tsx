@@ -1,6 +1,7 @@
 "use client";
 import type { FormEvent } from "react";
 import type { EventFormData } from "@/types/event";
+
 type Props = {
   form: EventFormData;
   editing: boolean;
@@ -9,6 +10,7 @@ type Props = {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   onCancel: () => void;
 };
+
 export default function EventForm({
   form,
   editing,

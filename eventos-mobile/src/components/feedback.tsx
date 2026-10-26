@@ -1,6 +1,7 @@
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { colors } from "@/styles/theme";
 import { Button } from "./button";
+
 export function Loading({ message = "Carregando…" }: { message?: string }) {
   return (
     <View style={styles.center}>
@@ -9,6 +10,7 @@ export function Loading({ message = "Carregando…" }: { message?: string }) {
     </View>
   );
 }
+
 export function Feedback({
   message,
   success = false,
@@ -38,6 +40,7 @@ export function Feedback({
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   center: {
     flex: 1,

@@ -16,6 +16,7 @@ export default function Register() {
   const [confirmation, setConfirmation] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+
   async function handleRegister() {
     if (name.trim().length < 2) {
       setError("Informe um nome com pelo menos 2 caracteres.");
@@ -44,6 +45,7 @@ export default function Register() {
       setBusy(false);
     }
   }
+  
   return (
     <FormScreen
       title="Crie sua conta"

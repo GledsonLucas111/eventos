@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { colors } from "@/styles/theme";
+
 type Props = {
   title: string;
   onPress: () => void;
@@ -12,6 +13,7 @@ type Props = {
   disabled?: boolean;
   variant?: "primary" | "outline" | "danger";
 };
+
 export function Button({
   title,
   onPress,
@@ -49,6 +51,7 @@ export function Button({
     </TouchableOpacity>
   );
 }
+
 const styles = StyleSheet.create({
   button: {
     minHeight: 48,

@@ -7,8 +7,11 @@ export type Event = {
   location: string;
   image: string;
 };
+
 export type User = { id: string; name: string; role: string };
+
 export type Session = { token: string; user: User };
+
 export type Registration = {
   id: string;
   userId: string;

@@ -8,7 +8,9 @@ export default async function DashboardLayout({
 }: {
   children: ReactNode;
 }) {
+
   const user = await requireAdmin();
+  
   return (
     <>
       <header className="border-b border-slate-200 bg-white">
