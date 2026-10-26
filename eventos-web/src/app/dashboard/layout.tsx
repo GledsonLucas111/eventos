@@ -16,7 +16,7 @@ export default async function DashboardLayout({
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 p-5">
           <Link href="/dashboard" className="text-xl font-bold text-blue-600">
-            eventos.
+            eventos
           </Link>
           <div className="flex items-center gap-4">
             <span className="hidden sm:inline">{user.name}</span>
