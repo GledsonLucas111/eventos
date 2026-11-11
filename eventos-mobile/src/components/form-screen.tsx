@@ -30,7 +30,6 @@ export function FormScreen({
           contentContainerStyle={styles.container}
         >
           <View style={styles.form}>
-            <Text style={styles.brand}>eventos.</Text>
             <Text style={common.title}>{title}</Text>
             <Text style={common.subtitle}>{subtitle}</Text>
             {children}
@@ -44,10 +43,4 @@ export function FormScreen({
 const styles = StyleSheet.create({
   container: { flexGrow: 1, justifyContent: "center", padding: 24 },
   form: { width: "100%", maxWidth: 440, alignSelf: "center", gap: 20 },
-  brand: {
-    fontSize: 30,
-    fontWeight: "800",
-    color: colors.primary,
-    marginBottom: 10,
-  },
 });

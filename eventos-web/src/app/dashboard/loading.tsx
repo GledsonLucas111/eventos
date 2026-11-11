@@ -1,7 +1,15 @@
 export default function Loading() {
   return (
-    <p role="status" className="py-10 text-slate-500">
-      Carregando eventos…
-    </p>
+    <div
+      role="status"
+      className="rounded-xl border border-[#30382f] bg-[#141814] p-6"
+    >
+      <p className="text-sm text-[#c6e998]">
+        Carregando eventos…
+      </p>
+      <p className="mt-2 text-sm text-[#a6afa1]">
+        Aguarde enquanto verificamos sua sessão.
+      </p>
+    </div>
   );
 }

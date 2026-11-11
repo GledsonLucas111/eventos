@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma as db } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { auth, handle, HttpError } from "@/lib/api";
 
 export async function POST(
@@ -11,11 +11,11 @@ export async function POST(
 
     const eventId = (await ctx.params).id;
 
-    if (!(await db.event.findUnique({ where: { id: eventId } })))
+    if (!(await prisma.event.findUnique({ where: { id: eventId } })))
       throw new HttpError(404, "Evento não encontrado.");
-    
+
     return NextResponse.json(
-      await db.registration.create({ data: { userId: user.id, eventId } }),
+      await prisma.registration.create({ data: { userId: user.id, eventId } }),
       { status: 201 },
     );
   });

@@ -1,23 +1,35 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
-import { requireAdmin } from "@/lib/session";
 import { logout } from "@/actions/auth";
+import { Suspense } from "react";
+import { requireAdmin } from "@/lib/session";
 
-export default async function DashboardLayout({
-  children,
-}: {
+type Props = {
   children: ReactNode;
-}) {
+};
 
-  const user = await requireAdmin();
-  
+export default function DashboardLayout({ children }: Props) {
   return (
-    <>
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 p-5">
-          <Link href="/dashboard" className="text-xl font-bold text-blue-600">
-            eventos.
-          </Link>
+    <Suspense
+      fallback={
+        <div className="dashboard-shell">
+          <p className="text-sm text-[#c6e998]">
+            Verificando sessão…
+          </p>
+        </div>
+      }
+    >
+      <AuthenticatedLayout>{children}</AuthenticatedLayout>
+    </Suspense>
+  );
+}
+
+async function AuthenticatedLayout({ children }: Props) {
+  const user = await requireAdmin();
+
+  return (
+        <>
+      <header className="bg-[#090b0a]">
+        <div className="mx-auto flex max-w-6xl gap-4 p-5 justify-end">
           <div className="flex items-center gap-4">
             <span className="hidden sm:inline">{user.name}</span>
             <form action={logout}>
@@ -26,7 +38,7 @@ export default async function DashboardLayout({
           </div>
         </div>
       </header>
-      <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">{children}</main>
+      <main className="dashboard-shell">{children}</main>
     </>
   );
 }

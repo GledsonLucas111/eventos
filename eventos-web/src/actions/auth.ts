@@ -17,16 +17,23 @@ export async function login(data: FormData) {
       password: z.string().min(1).max(72),
     })
     .safeParse(Object.fromEntries(data));
+
   if (!parsed.success)
     return { error: "Informe um e-mail e uma senha válidos." };
+
   try {
     const user = await prisma.user.findUnique({
       where: { email: parsed.data.email },
     });
-    if (!user || !(await compare(parsed.data.password, user.password)))
-      return { error: "E-mail ou senha incorretos." };
-    if (user.role !== "ADMIN")
-      return { error: "Esta área é exclusiva do administrador." };
+
+    if (!user || !(await compare(parsed.data.password, user.password))){
+        return { error: "E-mail ou senha incorretos." };
+    }
+
+    if (user.role !== "ADMIN") {
+        return { error: "Esta área é exclusiva do administrador." };
+    }
+    
     (await cookies()).set("session", await token(user.id), {
       httpOnly: true,
       sameSite: "strict",
@@ -34,6 +41,7 @@ export async function login(data: FormData) {
       path: "/",
       maxAge: 86400,
     });
+
     return { success: true };
   } catch (error) {
     console.error(error);

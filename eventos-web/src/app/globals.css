@@ -1,46 +1,62 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: dark;
+  --background: #090b0a;
+  --foreground: #eeefe9;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
 @layer base {
   body {
-    @apply m-0 bg-slate-50 font-sans text-[15px] text-slate-800;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-geist-sans), Arial, sans-serif;
+    line-height: 1.6;
   }
-
+  ::selection { background: #c6e998; color: #11170b; }
+  h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 600; letter-spacing: -.055em; line-height: 1.15; margin-bottom: 1rem; }
+  h2 { font-size: 1.3rem; font-weight: 600; letter-spacing: -.025em; }
+  h3 { font-size: 1.25rem; font-weight: 600; line-height: 1.35; margin: .65rem 0; overflow-wrap: anywhere; }
+  label { display: block; margin-bottom: 1.4rem; font-size: .875rem; font-weight: 500; color: #d7dbd2; }
+  input, textarea {
+    display: block; width: 100%; min-width: 0; margin-top: .5rem;
+    border: 1px solid #353b35; border-radius: .65rem; padding: .8rem 1rem;
+    background: #0c0f0d; color: #eeefe9; font: inherit; font-weight: 400;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  textarea { resize: vertical; }
+  input::placeholder, textarea::placeholder { color: #828a80; }
+  input:focus, textarea:focus { outline: none; border-color: #c6e998; box-shadow: 0 0 0 3px #c6e99820; }
+  small { display: block; margin-top: .5rem; color: #a4ada0; font-weight: 400; }
   button {
-    @apply cursor-pointer rounded-lg border border-slate-200 bg-white px-4 py-2.5 font-semibold text-slate-700 transition-colors hover:bg-slate-100 disabled:cursor-wait disabled:opacity-60;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid #3a4237; border-radius: .65rem; padding: .75rem 1.1rem;
+    background: #1c221b; color: #e8ecdf; font-size: .875rem; font-weight: 600;
+    cursor: pointer; transition: background .15s, border-color .15s;
   }
+  button:hover { background: #293025; }
+  button:disabled { opacity: .5; cursor: wait; }
+  a { transition: color .15s, background .15s; }
+  a:hover { color: #d9f6b2; }
+  :focus-visible { outline: 2px solid #c6e998; outline-offset: 4px; }
+  dialog::backdrop { background: #000b; backdrop-filter: blur(6px); }
+}
 
-  button:focus-visible,
-  a:focus-visible {
-    @apply outline-2 outline-offset-4 outline-blue-400;
-  }
-
-  input,
-  textarea {
-    @apply w-full rounded-md border border-slate-200 bg-white px-3 py-3 font-normal text-slate-800 outline-none focus:border-blue-600 focus:ring-3 focus:ring-blue-600/10;
-  }
-
-  label {
-    @apply mb-5 block text-sm font-semibold;
-  }
-
-  label input,
-  label textarea {
-    @apply mt-2 block;
-  }
-
-  h1 {
-    @apply mb-3 text-3xl leading-tight font-bold tracking-tight break-words sm:text-4xl;
-  }
-
-  h2 {
-    @apply text-lg font-semibold;
-  }
-
-  h3 {
-    @apply my-2.5 text-xl leading-snug font-semibold break-words;
-  }
-
-  small {
-    @apply mt-1.5 block text-xs leading-relaxed font-normal text-slate-500;
-  }
+@layer components {
+  .dashboard-shell { width: min(1200px, 100%); margin-inline: auto; padding: clamp(24px, 5vw, 64px) clamp(20px, 4vw, 48px); }
+  .login-screen { background: radial-gradient(ellipse at 15% 10%, #293320 0, transparent 45%), #090b0a; }
+  .login-panel { box-shadow: 0 24px 90px #0008; border-top: 3px solid #c6e998; }
+  .event-card { transition: border-color .2s, transform .2s; }
+  .event-card:hover { border-color: #6c8058; transform: translateY(-3px); }
+  form[method="get"] { align-items: stretch; }
+  form[method="get"] input { margin-top: 0; }
+  @media (max-width: 420px) { form[method="get"] { flex-wrap: wrap; } form[method="get"] button { width: 100%; } }
+  @media (prefers-reduced-motion: reduce) { .event-card, button, a, input, textarea { transition: none; } .event-card:hover { transform: none; } }
 }

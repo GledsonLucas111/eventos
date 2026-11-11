@@ -11,10 +11,8 @@ type Props = {
 
 export default function DeleteEventButton({ id, title }: Props) {
   const router = useRouter();
-
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dialogId = useId();
-
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
@@ -54,7 +52,7 @@ export default function DeleteEventButton({ id, title }: Props) {
         type="button"
         disabled={busy}
         onClick={openDialog}
-        className="border-0 px-0 py-1 text-sm text-red-700"
+        className="border-0 px-2 py-1 text-sm text-[#f4a7a0]"
       >
         Excluir
       </button>
@@ -67,39 +65,36 @@ export default function DeleteEventButton({ id, title }: Props) {
         onCancel={(event) => {
           if (busy) event.preventDefault();
         }}
-        className="fixed inset-0 m-auto w-[90vw] max-w-md rounded-2xl border border-slate-200 bg-white p-6 text-slate-800 shadow-xl backdrop:bg-slate-900/50"
+        className="fixed inset-0 m-auto w-[90vw] max-w-md rounded-2xl border border-[#30382f] bg-[#141814] p-6 text-[#eeefe9] shadow-xl backdrop:bg-slate-900/50"
       >
-        <h2
-          id={`${dialogId}-title`}
-          className="text-xl font-bold"
-        >
+        <h2 id={`${dialogId}-title`} className="text-xl font-bold">
           Excluir evento?
         </h2>
 
         <p
           id={`${dialogId}-description`}
-          className="mt-3 break-words text-sm leading-relaxed text-slate-500"
+          className="mt-3 break-words text-sm leading-relaxed text-[#a6afa1]"
         >
-          O evento <strong>{title}</strong> e suas inscrições
-          serão excluídos. Essa ação não pode ser desfeita.
+          O evento <strong>{title}</strong> e suas inscrições serão excluídos.
+          Essa ação não pode ser desfeita.
         </p>
 
         {error && (
           <p
             role="alert"
-            className="mt-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800"
+            className="mt-4 rounded-lg border border-[#643a35] bg-[#2b1917] p-3 text-sm text-[#ffc0b9]"
           >
             {error}
           </p>
         )}
 
-        <div className="mt-6 flex flex-wrap justify-end gap-3 border-t border-slate-100 pt-5">
+        <div className="mt-6 flex flex-wrap justify-end gap-3 border-t border-[#2b3229] pt-5">
           <button
             type="button"
             autoFocus
             disabled={busy}
             onClick={() => dialogRef.current?.close()}
-            className="border-slate-200 bg-white text-slate-700 hover:bg-slate-100"
+            className="border-[#30382f] bg-[#141814] text-[#d3dacc] hover:bg-[#252d22]"
           >
             Cancelar
           </button>

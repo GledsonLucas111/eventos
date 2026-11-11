@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { hash } from "bcryptjs";
-import { prisma as db } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { handle } from "@/lib/api";
 
 export async function POST(req: NextRequest) {
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
       })
       .parse(await req.json());
 
-    const user = await db.user.create({
+    const user = await prisma.user.create({
       data: { ...data, password: await hash(data.password, 10) },
       select: { id: true, name: true, email: true },
     });

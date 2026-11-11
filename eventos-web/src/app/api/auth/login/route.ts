@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { compare } from "bcryptjs";
-import { prisma as db } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { handle, HttpError, token } from "@/lib/api";
 
 export async function POST(req: NextRequest) {
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
       })
       .parse(await req.json());
 
-    const user = await db.user.findUnique({ where: { email: data.email } });
+    const user = await prisma.user.findUnique({ where: { email: data.email } });
 
     if (!user || !(await compare(data.password, user.password)))
       throw new HttpError(401, "E-mail ou senha incorretos.");

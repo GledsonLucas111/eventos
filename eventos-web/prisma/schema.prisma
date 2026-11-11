@@ -2,9 +2,12 @@ generator client {
   provider = "prisma-client"
   output = "../src/generated/prisma"
 }
+
 datasource db {
   provider = "postgresql"
 }
+
+
 model User {
   id String @id @default(cuid())
   name String
@@ -13,6 +16,7 @@ model User {
   role String @default("USER")
   registrations Registration[]
 }
+
 model Event {
   id String @id @default(cuid())
   title String
@@ -23,6 +27,7 @@ model Event {
   image String
   registrations Registration[]
 }
+
 model Registration {
   id String @id @default(cuid())
   userId String
